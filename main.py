@@ -5,8 +5,8 @@ from os import listdir
 from os.path import isfile,join
 from pickle import load,dump
 
-faces_path = r"D:\Live In Lab (Smart Surveillance)\Code\faces"
-ser_path = r"D:\Live In Lab (Smart Surveillance)\Code\data.pkl"
+faces_path = r"faces"
+ser_path = r"data/data.pkl"
 
 known_face_names = ["Ram","Raj"]
 
