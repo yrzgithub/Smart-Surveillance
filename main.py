@@ -20,7 +20,6 @@ else:
         print(f"Reading file : {face}")
         face_encodings_data.append(face_encodings(cv2.imread(join(faces_path,face)))[0])
 
-
 camera = cv2.VideoCapture(0)
 
 while not is_pressed("esc"):
