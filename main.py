@@ -114,4 +114,10 @@ while not is_pressed("esc"):
 
     img_index += 1
 
+
+
+if isinstance(source,cv2.VideoCapture):
+    source.release()
+
+
 cv2.destroyAllWindows()
