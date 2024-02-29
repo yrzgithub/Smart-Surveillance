@@ -2,3 +2,4 @@ venv
 objects
 .tmp.drivedownload
 .tmp.driveupload
+test
