@@ -70,7 +70,7 @@ img_index = 0
 
 
 
-while not is_pressed("esc"):
+while source.isOpened() and not is_pressed("esc"):
 
     if use_img:
 
