@@ -4,7 +4,9 @@ from face_recognition import face_encodings,compare_faces,face_locations
 from os import listdir
 from easygui import fileopenbox
 from os.path import *
+from pafy import new
 from pickle import load,dump
+from youtubesearchpython import VideosSearch
 from cvlib.object_detection import YOLO
 
 
@@ -18,7 +20,9 @@ labels = "models\obj.names"
 test = abspath("test\images")
 
 use_img = False
-use_video = True
+use_yt = True
+stream = False
+use_video = False
 
 known_face_names = ["Ram","Raj"]
 
@@ -57,6 +61,14 @@ else:
     if use_video:
         filename = fileopenbox(msg="Select video file",title="Smart Surveillance",filetypes="videos/*")
         source = cv2.VideoCapture(filename)
+    
+    elif use_yt:
+        stream_url = new(input("paste yt link : ")).getbestvideo().url
+        print(stream_url)
+        source = cv2.VideoCapture(stream_url)
+    
+    elif stream:
+        source = cv2.VideoCapture(input("Stream link : "))
 
     else:
         source = cv2.VideoCapture(0) 
@@ -108,8 +120,10 @@ while source.isOpened() and not is_pressed("esc"):
         confidence = confidences[index]
 
         print(label,confidence)
+    
+    img = cv2.resize(img,(1000,500))
 
-    cv2.imshow("Frame",cv2.resize(img,(500,500)))
+    cv2.imshow("Frame",img)
     cv2.waitKey(1)
 
     img_index += 1
