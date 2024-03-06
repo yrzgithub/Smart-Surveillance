@@ -20,6 +20,7 @@ const char* password = "#Jaihind20";
 
 // Enter Firebase storage bucket ID
 #define STORAGE_BUCKET_ID "smart-surveillance-37cd5.appspot.com"
+#define DATABASE_URL "smart-surveillance-37cd5.appspot.com"
 
 #define IMAGE_PATH "image.jpg"
 
@@ -98,6 +99,7 @@ void setup() {
   } 
 
   configuration.api_key = API_KEY;
+  configuration.database_url = DATABASE_URL;
   authentication.user.email = USER_EMAIL;
   authentication.user.password = USER_PASSWORD;
   configuration.token_status_callback = tokenStatusCallback; 
@@ -124,7 +126,7 @@ void loop() {
   {
       Serial.print("Uploading Photo... ");
   
-     if (Firebase.Storage.upload(&fbdo, STORAGE_BUCKET_ID, frame_data, fb->len, IMAGE_PATH, "image/jpg" ))
+     if (Firebase.RTDB.setString(&fbdo,"image","uruttu"))
       {
         Serial.printf("\nDownload URL: %s\n", fbdo.downloadURL().c_str());
       }
