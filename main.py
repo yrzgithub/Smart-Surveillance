@@ -8,6 +8,9 @@ from pafy import new
 from pickle import load,dump
 from youtubesearchpython import VideosSearch
 from cvlib.object_detection import YOLO
+from pyrebase import initialize_app
+import numpy
+from requests import get
 
 
 
@@ -20,8 +23,9 @@ labels = "models\obj.names"
 test = abspath("test\images")
 
 use_img = False
-use_yt = True
+use_yt = False
 stream = False
+use_cloud = True
 use_video = False
 
 known_face_names = ["Ram","Raj"]
@@ -52,34 +56,51 @@ else:
 
 
 
+model = YOLO(weights=weights,config=config,labels=labels,version="yolo-tiny")
+img_index = 0
+
+firebaseConfig = {
+  "apiKey": "AIzaSyDKzdFq44XLPspZEsfLBWtfmzQYp9KB0jk",
+  "authDomain": "smart-surveillance-37cd5.firebaseapp.com",
+  "databaseURL": "https://smart-surveillance-37cd5-default-rtdb.firebaseio.com",
+  "projectId": "smart-surveillance-37cd5",
+  "storageBucket": "smart-surveillance-37cd5.appspot.com",
+  "messagingSenderId": "53238167841",
+  "appId": "1:53238167841:web:ddb1fe20aeb4bba08d2660"
+}
+
+app = initialize_app(config=firebaseConfig)
+
+storage = app.storage()
+auth = app.auth()
+
+user = auth.sign_in_with_email_and_password("seenusanjay20102002@gmail.com","#Jaihind20")
+
+
+if not use_cloud:
+    source = input("Paste the source : ")
+
 
 if use_img:
     source = listdir(test)
     source_len = len(source)
 
-else:
-    if use_video:
+elif use_video:
         filename = fileopenbox(msg="Select video file",title="Smart Surveillance",filetypes="videos/*")
         source = cv2.VideoCapture(filename)
     
-    elif use_yt:
-        stream_url = new(input("paste yt link : ")).getbestvideo().url
-        print(stream_url)
-        source = cv2.VideoCapture(stream_url)
-    
-    elif stream:
-        source = cv2.VideoCapture(input("Stream link : "))
+elif use_yt:
+    stream_url = new(input("paste yt link : ")).getbestvideo().url
+    print(stream_url)
+    source = cv2.VideoCapture(stream_url)
 
-    else:
-        source = cv2.VideoCapture(0) 
+elif stream:
+    source = cv2.VideoCapture(input("Stream link : "))
 
-    source_len = 0
+else:
+    source = cv2.VideoCapture(0) 
 
-
-
-model = YOLO(weights=weights,config=config,labels=labels,version="yolo-tiny")
-img_index = 0
-
+source_len = 0
 
 
 while source.isOpened() and not is_pressed("esc"):
@@ -91,6 +112,11 @@ while source.isOpened() and not is_pressed("esc"):
         
         else:
             break
+
+    elif use_cloud:
+        link = storage.child("image.jpg").get_url(user["idToken"])
+        arr = numpy.asarray(bytearray(get(link).content),numpy.uint8)
+        img = cv2.imdecode(arr,cv2.IMREAD_COLOR)
 
     else:
         _,img = source.read()
@@ -121,9 +147,9 @@ while source.isOpened() and not is_pressed("esc"):
 
         print(label,confidence)
     
-    img = cv2.resize(img,(1000,500))
+    # img = cv2.resize(img,(1000,500))
 
-    cv2.imshow("Frame",img)
+    cv2.imshow("Frame",cv2.resize(img,(500,500)))
     cv2.waitKey(1)
 
     img_index += 1
