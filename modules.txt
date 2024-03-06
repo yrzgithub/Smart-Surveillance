@@ -1,3 +1,0 @@
-opencv-python
-keyboard
-face_recognition
