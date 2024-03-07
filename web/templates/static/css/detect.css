@@ -1,0 +1,16 @@
+.detectImg {
+    width: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.result {
+    position: absolute;
+    left: 55%;
+    top: 50%;
+}
+
+table {
+    border: 1px solid black;
+}
