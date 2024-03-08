@@ -7,7 +7,6 @@ class Terrorist:
     name = ""
     img = None
     age = 20
-    gender = ""
     country = ""
     group = ""
     religion = ""
@@ -29,10 +28,6 @@ class Terrorist:
 
     def getAge(self):
         return self.age 
-    
-
-    def getGender(self):
-        return self.gender 
     
 
     def getCountry(self):
@@ -65,11 +60,7 @@ class Terrorist:
 
     def setAge(self,age):
         self.age = age 
-    
-
-    def setGender(self,gender):
-        self.gender = gender
-    
+        
 
     def setCountry(self,country):
         self.country = country

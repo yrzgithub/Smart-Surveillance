@@ -28,7 +28,7 @@ body {
     font-size: 1.5rem;
 }
 
-.obj {
+.terrorist {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -37,7 +37,7 @@ body {
     width: 40%;
 }
 
-.obj input {
+.terrorist input {
     font-size: 1.2rem;
     padding-left: 4%;
     padding-top: 3%;
@@ -45,7 +45,7 @@ body {
     width: 100%;
 }
 
-.obj input:not(:first-child)
+.terrorist input:not(:first-child)
 {
-    margin-top: 2%;
+    margin-top: 4%;
 }
