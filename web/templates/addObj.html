@@ -6,14 +6,20 @@
         <meta charset="utf-8" name="viewport" content="width=device-width,initial-scale=1"/>
         <title>Dark Hand</title>
         <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkbJZ1GrmwzM_pPqlz5zJimqQzaNViEW3kpQ&usqp=CAU">
-        <link rel="stylesheet" href="static\css\obj.css">
-        <script src="static\js\obj.js"></script>
+        <link rel="stylesheet" href="static\css\addObj.css">
+        <script src="static\js\addObj.js"></script>
 
     </head>
 
     <body>
 
-        <img class="detectImg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQL1nU80V0pRvzvheWQKvIjsWLlrQ_jQDkT2H9JEOBy0mLc2d_MCw_WEvUzYhlLxxiLmUQ&usqp=CAU">
+        <div class="getImg">
+
+           
+            <img id="upload" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyHlhRBUevbh8DcWe7o5epTHj3PS0o7vsV1A&usqp=CAU">
+            <input onchange="put(event)" accept="image/*" type="file"> 
+
+        </div>
 
         <table class="obj">
 
@@ -29,7 +35,7 @@
                 </td>
 
                 <td>
-                    name
+                    <input>
                 </td>
             </tr>
 

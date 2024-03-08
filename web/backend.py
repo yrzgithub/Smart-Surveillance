@@ -89,6 +89,97 @@ class Terrorist:
 
     def setIllness(self,illness):
         self.illness = illness
+
+
+
+class Weapon:
+
+    name = ""
+    img = None
+    color = ""
+    type = ""
+    power = ""
+    accuracy = ""
+    range = ""
+    reliability = ""
+    portability = ""
+
+
+    def __init__(self,name,img):
+        self.name = name
+        self.img = img
+
+
+    def getName(self):
+        return self.name 
+    
+
+    def getImg(self):
+        return self.img 
+    
+
+    def getColor(self):
+        return self.color 
+    
+
+    def getType(self):
+        return self.type 
+
+    
+    def getPower(self):
+        return self.power 
+    
+
+    def getAccuracy(self):
+        return self.accuracy
+    
+
+    def getRange(self):
+        return self.range 
+    
+
+    def getReliability(self):
+        return self.reliability 
+    
+
+    def getPortability(self):
+        return self.portability
+    
+
+    def setName(self,name):
+        self.name = name
+    
+
+    def setImg(self,img):
+        self.img = img
+    
+
+    def setColor(self,color):
+        self.color = color 
+    
+
+    def setType(self,type):
+        self.type = type
+
+    
+    def setPower(self,power):
+        self.power = power
+    
+
+    def setAccuracy(self,accuracy):
+        self.accuracy = accuracy
+    
+
+    def setRange(self,range):
+        self.range = range
+    
+
+    def setReliability(self,reliability):
+        self.reliability = reliability
+    
+
+    def setPortability(self,portability):
+        self.portability = portability
         
 
 
