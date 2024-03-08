@@ -14,7 +14,7 @@ a {
     text-decoration: none;
 }
 
-.result {
+.terrorist {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -37,5 +37,5 @@ th {
 
 th,td {
     width: 50%;
-    padding: 5%;
+    padding: 3%;
 }
