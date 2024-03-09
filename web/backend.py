@@ -224,4 +224,10 @@ def face(face):
     return render_template("face.html")
 
 
+@app.route("/addFace")
+def addImg():
+    return render_template("addFace.html")
+
+
+
 app.run(debug=True)
