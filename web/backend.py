@@ -1,4 +1,5 @@
 from flask import *
+from pyrebase import *
 
 
 
@@ -174,7 +175,22 @@ class Weapon:
         
 
 
+firebaseConfig = {
+  "apiKey": "AIzaSyDKzdFq44XLPspZEsfLBWtfmzQYp9KB0jk",
+  "authDomain": "smart-surveillance-37cd5.firebaseapp.com",
+  "databaseURL": "https://smart-surveillance-37cd5-default-rtdb.firebaseio.com",
+  "projectId": "smart-surveillance-37cd5",
+  "storageBucket": "smart-surveillance-37cd5.appspot.com",
+  "messagingSenderId": "53238167841",
+  "appId": "1:53238167841:web:ddb1fe20aeb4bba08d2660"
+}
+
+
+
 app = Flask(__name__)
+firebase = initialize_app(firebaseConfig)
+auth = firebase.auth()
+
 
 
 @app.route("/")
@@ -187,8 +203,15 @@ def detect():
     form = request.form 
     username = form["username"].strip()
     password = form["password"].strip()
-    print(username,password)
-    return render_template("detect.html")
+
+    result = None
+
+    try:
+        result = auth.sign_in_with_email_and_password(username,password)
+        return render_template("detect.html")
+
+    except Exception as e:
+        return render_template("error.html",error = e)
 
 
 @app.route("/object/{weapon}")
@@ -197,7 +220,7 @@ def obj(weapon):
 
 
 @app.route("/face/{face}")
-def obj(face):
+def face(face):
     return render_template("face.html")
 
 
