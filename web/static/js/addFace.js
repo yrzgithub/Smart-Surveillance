@@ -10,8 +10,10 @@ function put(event)
     }
 }
 
-function upload(element)
+function upload(event)
 {
+    event.preventDefault();
+
     var name = document.getElementById("name");
     var number = document.getElementById("number");
     var residence = document.getElementById("residence");
@@ -22,8 +24,6 @@ function upload(element)
     var upload = document.getElementById("file");
 
     var nameN = name.value;
-
-    console.log(nameN);
 
     if(nameN == "")
     {
@@ -39,14 +39,28 @@ function upload(element)
         return;
     }
 
-    console.log(file);
+    console.log(files);
 
     var form = new FormData();
-    form.append("file",files);
-    form.append("var",2);
+    form.append("file",files[0]);
+    
+    form.append("name",name.value);
+    form.append("number",number.value);
+    form.append("residence",residence.value);
+    form.append("group",group.value);
+    form.append("religion",relegion.value);
+    form.append("religion",relegion.value);
+    form.append("illness",illness.value);
 
-    var http = new XMLHttpRequest();
-    http.open("POST","/uploadFace");
-    http.setRequestHeader("Content-Type","application/json");
-    http.send(form);
+
+    fetch("/uploadFace",{"method":"post","body":form})
+    .then(
+        (resolve) => {
+            alert("File uploaded successfully.");
+        },
+
+        (reject) => {
+            alert("Something went wrong.");
+        }
+    );
 }

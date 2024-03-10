@@ -242,10 +242,7 @@ def addImg():
 
 @app.route("/uploadFace",methods=["POST"])
 def uploadFace():
-    print(request.files)
-    print(request.form)
-    print(request.args)
-    return ""
+    return Response(status=200)
 
 
 
