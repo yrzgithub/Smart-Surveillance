@@ -1,5 +1,8 @@
 from flask import *
 from pyrebase import *
+from pickle import load,dump
+from os.path import *
+from os import makedirs
 
 
 
@@ -187,6 +190,14 @@ firebaseConfig = {
 
 
 
+dataPath = "data\data.pkl"
+
+
+if not isdir("data"):
+    makedirs("data")
+
+
+
 app = Flask(__name__)
 firebase = initialize_app(firebaseConfig)
 auth = firebase.auth()
@@ -227,6 +238,14 @@ def face(face):
 @app.route("/addFace")
 def addImg():
     return render_template("addFace.html")
+
+
+@app.route("/uploadFace",methods=["POST"])
+def uploadFace():
+    print(request.files)
+    print(request.form)
+    print(request.args)
+    return ""
 
 
 

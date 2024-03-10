@@ -42,10 +42,28 @@ body {
     padding-left: 4%;
     padding-top: 3%;
     padding-bottom: 3%;
-    width: 100%;
+    width: 95%;
 }
 
 .terrorist input:not(:first-child)
 {
-    margin-top: 4%;
+    margin-top: 2.5%;
+}
+
+.terrorist button {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 90%;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    border: 2px solid blue;
+    color: white;
+    cursor: pointer;
+    background-color: blue;
+    padding: 1.2%;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 6%;
 }

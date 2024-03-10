@@ -16,27 +16,27 @@
         <div class="getImg">
 
             <img id="upload" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyHlhRBUevbh8DcWe7o5epTHj3PS0o7vsV1A&usqp=CAU">
-            <input onchange="put(event)" accept="image/*" type="file"> 
+            <input id="file" onchange="put(event)" accept="image/*" type="file"> 
 
         </div>
 
         <div class="terrorist">
 
-            <input placeholder="Name">
+            <input id="name" placeholder="Name">
             <br>
-            <input type="number" placeholder="Age">
+            <input id="number" type="number" placeholder="Age">
             <br>
-            <input placeholder="Residence">
+            <input id="residence" placeholder="Residence">
             <br>
-            <input placeholder="Group">
+            <input id="group" placeholder="Group">
             <br>
-            <input placeholder="Religion">
+            <input id="relegion" placeholder="Religion">
             <br>
-            <input placeholder="Position">
+            <input id="position" placeholder="Position">
             <br>
-            <input placeholder="Illness">
-            <br>
-            <button></button>
+            <input id="illness" placeholder="Illness">
+       
+            <button onclick="upload(this)">Upload</button>
             
         </div>
         
