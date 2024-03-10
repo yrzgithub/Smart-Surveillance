@@ -98,15 +98,13 @@ def addImg():
 
 
 def getEncodedImage(type_,img):
-    image = f"data:{type_};base64," + b64encode(cv2.imencode(".jpeg",img)[1]).decode()
+    image = f"data:{type_};base64," + b64encode(cv2.imencode(type_,img)[1]).decode()
     return image
 
 
 @app.route("/uploadFace",methods=["POST"])
 def uploadFace():
     img = request.files["file"]
-    type_ = img.content_type.replace("image/","") 
-    print(type_)
 
     print("Decoding...")
 
@@ -128,7 +126,7 @@ def uploadFace():
     success,buffer = cv2.imencode(".png",image)
     
     if len_face_encodings > 1:
-        return dumps({"error":"More than one face found.","img":getEncodedImage(img.content_type,image)})
+        return dumps({"error":"More than one face found.","img":getEncodedImage(".png",image)})
 
     args = request.form
 
@@ -154,8 +152,11 @@ def uploadFace():
     with open(dataPathFace,"wb") as file:
         pickle.dump(data,file)
         file.close()
+    
+    print("Writing Image...")
+    cv2.imwrite(f"data\\faces\\{terrorist.id}.png",image)
 
-    return dumps({"msg":"Image Uploaded","img":getEncodedImage(img.content_type,image)})
+    return dumps({"msg":"Image Uploaded","img":getEncodedImage(".png",image)})
 
 
 

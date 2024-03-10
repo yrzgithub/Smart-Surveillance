@@ -15,6 +15,7 @@ class Terrorist:
     position = ""
     id = 0
     illness = ""
+    face_encoding = None
 
 
     def __init__(self,name):
@@ -57,6 +58,10 @@ class Terrorist:
         return self.illness
     
 
+    def getFaceEncodings(self):
+        return self.face_encoding
+    
+
     def setName(self,name):
         self.name = name 
     
@@ -91,6 +96,10 @@ class Terrorist:
 
     def setIllness(self,illness):
         self.illness = illness
+    
+
+    def saveFaceEncodingd(self,encodings):
+        self.face_encoding = encodings
 
 
 
