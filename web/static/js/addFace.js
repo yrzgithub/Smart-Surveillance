@@ -18,7 +18,7 @@ function upload(event)
     var number = document.getElementById("number");
     var residence = document.getElementById("residence");
     var group = document.getElementById("group");
-    var relegion = document.getElementById("relegion");
+    var religion = document.getElementById("relegion");
     var position = document.getElementById("position");
     var illness = document.getElementById("illness");
     var upload = document.getElementById("file");
@@ -43,13 +43,13 @@ function upload(event)
 
     var form = new FormData();
     form.append("file",files[0]);
-    
+
     form.append("name",name.value);
     form.append("number",number.value);
     form.append("residence",residence.value);
     form.append("group",group.value);
-    form.append("religion",relegion.value);
-    form.append("religion",relegion.value);
+    form.append("religion",religion.value);
+    form.append("position",position.value);
     form.append("illness",illness.value);
 
 
