@@ -13,6 +13,7 @@ class Terrorist:
     group = ""
     religion = ""
     position = ""
+    id = 0
     illness = ""
 
 
@@ -22,6 +23,10 @@ class Terrorist:
 
     def getName(self):
         return self.name 
+    
+
+    def getId(self):
+        return id
     
 
     def getImg(self):
@@ -58,6 +63,10 @@ class Terrorist:
 
     def setImg(self,img):
         self.img = img
+
+
+    def setId(self,id):
+        self.id = id
     
 
     def setAge(self,age):

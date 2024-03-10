@@ -5,6 +5,8 @@ from cvlib.object_detection import *
 from os.path import *
 from os import makedirs
 from classes import *
+import cv2 
+import numpy as np
 import pickle
 
 
@@ -25,6 +27,7 @@ conf = "models\yolo-tiny-obj.cfg"
 weights = "models\yolo-tiny-obj.weights"
 labels = "models\obj.names"
 dataPathFace = abspath("data\dataFace.pkl")
+pathFaces = abspath("data\\faces")
 
 
 
@@ -32,6 +35,9 @@ data = []
 
 if not isdir("data"):
     makedirs("data")
+
+if not isdir(pathFaces):
+    makedirs(pathFaces)
 
 
 if isfile(dataPathFace):
@@ -93,8 +99,20 @@ def addImg():
 def uploadFace():
     img = request.files["file"]
 
+    image = cv2.imdecode(np.frombuffer(bytearray(img.read()),np.uint8),cv2.IMREAD_COLOR)
+
+    face_encoding = face_encodings(image)
+    print(face_encoding)
+
+    len_face_encodings = len(face_encoding)
+    
+    if len_face_encodings == 0:
+        return "No Face Found."
+    
+    if len_face_encodings > 1:
+        return "More than one face found."
+
     args = request.form
-    print(args)
 
     name = args["name"]
     age = args["number"]
@@ -111,15 +129,15 @@ def uploadFace():
     terrorist.setPosition(position)
     terrorist.setGroup(group)
     terrorist.setCountry(residence)
+    terrorist.setId(len(data))
 
     data.append(terrorist)
-    print(data)
 
     with open(dataPathFace,"wb") as file:
         pickle.dump(data,file)
         file.close()
 
-    return Response(status=200)
+    return "Image Uploaded"
 
 
 

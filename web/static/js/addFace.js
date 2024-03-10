@@ -39,8 +39,6 @@ function upload(event)
         return;
     }
 
-    console.log(files);
-
     var form = new FormData();
     form.append("file",files[0]);
 
@@ -54,13 +52,8 @@ function upload(event)
 
 
     fetch("/uploadFace",{"method":"post","body":form})
-    .then(
-        (resolve) => {
-            alert("File uploaded successfully.");
-        },
-
-        (reject) => {
-            alert("Something went wrong.");
-        }
-    );
+    .then(response => response.text())
+    .then(response => {
+        alert(response);
+    });
 }
