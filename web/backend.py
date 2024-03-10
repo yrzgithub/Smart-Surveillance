@@ -6,7 +6,9 @@ from os.path import *
 from os import makedirs
 from classes import *
 import cv2 
+from json import dumps
 import numpy as np
+from base64 import b64encode
 import pickle
 
 
@@ -95,22 +97,38 @@ def addImg():
     return render_template("addFace.html")
 
 
+def getEncodedImage(type_,img):
+    image = f"data:{type_};base64," + b64encode(cv2.imencode(".jpeg",img)[1]).decode()
+    return image
+
+
 @app.route("/uploadFace",methods=["POST"])
 def uploadFace():
     img = request.files["file"]
+    type_ = img.content_type.replace("image/","") 
+    print(type_)
+
+    print("Decoding...")
 
     image = cv2.imdecode(np.frombuffer(bytearray(img.read()),np.uint8),cv2.IMREAD_COLOR)
 
+    print("Encoding Face..")
+
     face_encoding = face_encodings(image)
-    print(face_encoding)
 
     len_face_encodings = len(face_encoding)
     
     if len_face_encodings == 0:
-        return "No Face Found."
+        return dumps({"error":"No Face Found."})
+    
+    print("Locating Face...")
+    
+    a,b,c,d = face_locations(image)[0]
+    image = cv2.rectangle(image,(d,a),(b,c),(51,255,255),3)
+    success,buffer = cv2.imencode(".png",image)
     
     if len_face_encodings > 1:
-        return "More than one face found."
+        return dumps({"error":"More than one face found.","img":getEncodedImage(img.content_type,image)})
 
     args = request.form
 
@@ -137,7 +155,7 @@ def uploadFace():
         pickle.dump(data,file)
         file.close()
 
-    return "Image Uploaded"
+    return dumps({"msg":"Image Uploaded","img":getEncodedImage(img.content_type,image)})
 
 
 

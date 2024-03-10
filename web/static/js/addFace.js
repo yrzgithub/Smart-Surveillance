@@ -14,6 +14,8 @@ function upload(event)
 {
     event.preventDefault();
 
+    console.log("clicked..");
+
     var name = document.getElementById("name");
     var number = document.getElementById("number");
     var residence = document.getElementById("residence");
@@ -22,6 +24,7 @@ function upload(event)
     var position = document.getElementById("position");
     var illness = document.getElementById("illness");
     var upload = document.getElementById("file");
+    var selected = document.getElementById("upload");
 
     var nameN = name.value;
 
@@ -39,6 +42,16 @@ function upload(event)
         return;
     }
 
+    var spinner = document.getElementById("spinner");
+    var button = document.getElementById("button");
+    var uploadbtn = document.getElementById("uploadbtn");
+
+    spinner.className = "fa fa-spinner fa-spin spinner";
+    button.innerHTML = "uploading...";
+
+    uploadbtn.style.opacity = ".5";
+    uploadbtn.disabled = true;
+
     var form = new FormData();
     form.append("file",files[0]);
 
@@ -54,6 +67,20 @@ function upload(event)
     fetch("/uploadFace",{"method":"post","body":form})
     .then(response => response.json())
     .then(response => {
-        alert(response);
+        if(response.img != undefined)
+        {
+            selected.src = response.img;
+        }
+    })
+    .finally(()=> {
+        spinner.classList.remove("fa");
+        spinner.classList.remove("fa-spinner");
+        spinner.classList.remove("fa-spin");
+        spinner.classList.remove("spinner");
+
+        button.innerHTML = "Upload";
+
+        uploadbtn.style.opacity = "1";
+        uploadbtn.disabled = false;
     });
 }
