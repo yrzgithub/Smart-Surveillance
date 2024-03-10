@@ -5,6 +5,7 @@ from cvlib.object_detection import *
 from os.path import *
 from os import makedirs
 from classes import *
+import pickle
 
 
 
@@ -23,6 +24,21 @@ firebaseConfig = {
 conf = "models\yolo-tiny-obj.cfg"
 weights = "models\yolo-tiny-obj.weights"
 labels = "models\obj.names"
+dataPathFace = abspath("data\dataFace.pkl")
+
+
+
+data = []
+
+if not isdir("data"):
+    makedirs("data")
+
+
+if isfile(dataPathFace):
+    with open(dataPathFace,"rb") as file:
+        fd = pickle.load(file)
+        data.extend(fd)
+        file.close()
 
 
 
@@ -88,7 +104,7 @@ def uploadFace():
     group = args["group"]
     residence = args["residence"]
 
-    terrorist = Terrorist(name,img)
+    terrorist = Terrorist(name)
     terrorist.setAge(age)
     terrorist.setReligion(religion)
     terrorist.setIllness(illness)
@@ -96,7 +112,12 @@ def uploadFace():
     terrorist.setGroup(group)
     terrorist.setCountry(residence)
 
-    terrorist.saveFace()
+    data.append(terrorist)
+    print(data)
+
+    with open(dataPathFace,"wb") as file:
+        pickle.dump(data,file)
+        file.close()
 
     return Response(status=200)
 

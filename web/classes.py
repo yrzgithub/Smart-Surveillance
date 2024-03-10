@@ -15,9 +15,9 @@ class Terrorist:
     position = ""
     illness = ""
 
-    def __init__(self,name,img):
+
+    def __init__(self,name):
         self.name = name
-        self.img = img 
     
 
     def getName(self):
@@ -82,17 +82,6 @@ class Terrorist:
 
     def setIllness(self,illness):
         self.illness = illness
-
-
-    def getFaces(self):
-        return data
-    
-
-    def saveFace(self):
-        data.append(self)
-        with open(dataPathFace,"wb") as file:
-            pickle.dump(data,file)
-            file.close()
 
 
 
@@ -184,20 +173,3 @@ class Weapon:
 
     def setPortability(self,portability):
         self.portability = portability
-
-
-
-dataPathFace = abspath("data\dataFace.pkl")
-
-data = []
-
-if not isdir("data"):
-    makedirs("data")
-
-
-if isfile(dataPathFace):
-    with open(dataPathFace,"rb") as file:
-        fd = pickle.load(file)
-        print(fd)
-        data.extend(fd)
-        file.close()
