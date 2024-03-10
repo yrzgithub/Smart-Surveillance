@@ -52,7 +52,7 @@ function upload(event)
 
 
     fetch("/uploadFace",{"method":"post","body":form})
-    .then(response => response.text())
+    .then(response => response.json())
     .then(response => {
         alert(response);
     });
