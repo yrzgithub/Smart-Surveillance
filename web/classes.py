@@ -1,23 +1,6 @@
-from os.path import isfile,isdir
+from os.path import isfile,isdir,abspath
 from os import makedirs
 import pickle
-
-
-
-dataPathFace = "data\dataFace.pkl"
-
-data = []
-
-if not isdir("data"):
-    makedirs("data")
-
-
-if isfile(dataPathFace):
-    with open(dataPathFace,"rb") as file:
-        fd = pickle.load(file)
-        print(fd)
-        data.extend(fd)
-        file.close()
 
 
 
@@ -105,10 +88,10 @@ class Terrorist:
         return data
     
 
-    def addFace(self):
+    def saveFace(self):
         data.append(self)
-        with open(dataPathFace) as file:
-            dump(data,file)
+        with open(dataPathFace,"wb") as file:
+            pickle.dump(data,file)
             file.close()
 
 
@@ -201,3 +184,20 @@ class Weapon:
 
     def setPortability(self,portability):
         self.portability = portability
+
+
+
+dataPathFace = abspath("data\dataFace.pkl")
+
+data = []
+
+if not isdir("data"):
+    makedirs("data")
+
+
+if isfile(dataPathFace):
+    with open(dataPathFace,"rb") as file:
+        fd = pickle.load(file)
+        print(fd)
+        data.extend(fd)
+        file.close()

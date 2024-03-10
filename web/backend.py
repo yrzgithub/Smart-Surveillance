@@ -96,6 +96,8 @@ def uploadFace():
     terrorist.setGroup(group)
     terrorist.setCountry(residence)
 
+    terrorist.saveFace()
+
     return Response(status=200)
 
 
