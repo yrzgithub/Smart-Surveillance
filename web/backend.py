@@ -6,6 +6,7 @@ from os.path import *
 from os import makedirs
 from classes import *
 import cv2 
+from requests import get
 from json import dumps
 import numpy as np
 from base64 import b64encode
@@ -32,6 +33,9 @@ dataPathFace = abspath("data\dataFace.pkl")
 pathFaces = abspath("data\\faces")
 
 
+imgUrl = "https://firebasestorage.googleapis.com/v0/b/smart-surveillance-37cd5.appspot.com/o/image.jpg?alt=media&token=74ea648b-3d1c-4a3b-aeec-6ba192ae4e3c"
+
+
 
 data = []
 
@@ -47,6 +51,9 @@ if isfile(dataPathFace):
         fd = pickle.load(file)
         data.extend(fd)
         file.close()
+
+
+known_face_encodings = [terrorist for terrorist in data]
 
 
 
@@ -73,6 +80,24 @@ def detect():
     password = form["password"].strip()
 
     result = None
+
+    image = cv2.imdecode(np.frombuffer(bytearray(get(imgUrl).content)),cv2.IMREAD_COLOR)
+
+    face_encodings = face_encodings(image)
+
+    locations = face_locations(image)
+
+    for location in locations:
+        a,b,c,d = location 
+        image = cv2.rectangle(image,(d,a),(b,c),(51,225,225),3)
+
+
+    bboxs,labels,confs = yolo.detect_objects(image)
+    image = draw_bbox(image,bboxs,labels,confs,(193,182,225),True)
+
+
+    faces = compare_faces()
+
 
     try:
         result = auth.sign_in_with_email_and_password(username,password)
@@ -121,8 +146,9 @@ def uploadFace():
     
     print("Locating Face...")
     
-    a,b,c,d = face_locations(image)[0]
-    image = cv2.rectangle(image,(d,a),(b,c),(51,255,255),3)
+    for location in face_locations(image):
+        a,b,c,d = location(image)
+        image = cv2.rectangle(image,(d,a),(b,c),(51,255,255),3)
     
     if len_face_encodings > 1:
         return dumps({"error":"More than one face found.","img":getEncodedImage(".png",image)})
