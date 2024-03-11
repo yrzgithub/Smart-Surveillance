@@ -47,7 +47,7 @@ function upload(event)
     var uploadbtn = document.getElementById("uploadbtn");
 
     spinner.className = "fa fa-spinner fa-spin spinner";
-    button.innerHTML = "uploading...";
+    button.innerHTML = "Uploading";
 
     uploadbtn.style.opacity = ".5";
     uploadbtn.disabled = true;
@@ -71,6 +71,15 @@ function upload(event)
         {
             selected.src = response.img;
         }
+
+        if(response.error != undefined)
+        {
+            alert(response.error);
+            return;
+        }
+
+        alert("Image Uploaded");
+        
     })
     .finally(()=> {
         spinner.classList.remove("fa");

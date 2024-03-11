@@ -123,7 +123,6 @@ def uploadFace():
     
     a,b,c,d = face_locations(image)[0]
     image = cv2.rectangle(image,(d,a),(b,c),(51,255,255),3)
-    success,buffer = cv2.imencode(".png",image)
     
     if len_face_encodings > 1:
         return dumps({"error":"More than one face found.","img":getEncodedImage(".png",image)})
