@@ -98,7 +98,7 @@ class Terrorist:
         self.illness = illness
     
 
-    def saveFaceEncodingd(self,encodings):
+    def saveFaceEncodings(self,encodings):
         self.face_encoding = encodings
 
 

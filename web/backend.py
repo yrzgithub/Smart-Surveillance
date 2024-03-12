@@ -34,6 +34,7 @@ pathFaces = abspath("data\\faces")
 
 
 imgUrl = "https://firebasestorage.googleapis.com/v0/b/smart-surveillance-37cd5.appspot.com/o/image.jpg?alt=media&token=74ea648b-3d1c-4a3b-aeec-6ba192ae4e3c"
+prev = None
 
 
 
@@ -75,7 +76,6 @@ def home():
 
 @app.route("/detect",methods=["POST"])
 def detect():
-    site = {}
 
     form = request.form 
     username = form["username"].strip()
@@ -83,15 +83,44 @@ def detect():
 
     result = None
 
-    image = cv2.imdecode(np.frombuffer(bytearray(get(imgUrl).content)),cv2.IMREAD_COLOR)
+    try:
+        result = auth.sign_in_with_email_and_password(username,password)
+        return render_template("detect.html")
 
-    face_encodings = face_encodings(image)
+    except Exception as e:
+        return render_template("error.html",error = e)
+    
+
+@app.route("/getimage")
+def getimage():
+    global prev 
+
+    site = {}
+
+    print("Decoding...")
+
+    content = get(imgUrl).content
+
+    image = cv2.imdecode(np.frombuffer(bytearray(content),np.uint8),cv2.IMREAD_COLOR)
+
+    if prev == content:
+        return dumps({"error":"alerady processed"})
+
+    prev = content
+
+    print("Encoding faces...")
+
+    fencodings = face_encodings(image)
+
+    print("Locating Images...")
 
     locations = face_locations(image)
 
     for location in locations:
         a,b,c,d = location 
-        image = cv2.rectangle(image,(d,a),(b,c),(51,225,225),3)
+        image = cv2.rectangle(image,(d,a),(b,c),(51,225,225),1)
+    
+    print("Detecting Objects...")
 
     bboxs,labels,confs = yolo.detect_objects(image)
     image = draw_bbox(image,bboxs,labels,confs,(193,182,225),True)
@@ -99,24 +128,22 @@ def detect():
     site["objects"] = labels
     site["faces"] = []
 
-    for encodings in face_encodings:
-        faceList = face_distance(known_face_encodings,encodings)
-        maximum = max(faceList)
-        if maximum < 0.6:
+    print("Recognizing...")
+
+    for encodings in fencodings:
+        faceList = list(face_distance(known_face_encodings,encodings))
+        print(faceList)
+        minumum = min(faceList)
+        if minumum >= 0.6:
             break 
-        index = faceList.index(maximum)
+        index = faceList.index(minumum)
         location = locations[index]
         detected_terrorist = data[index]
         site["faces"].append(detected_terrorist.getName())
         (a,b,c,d) = location
-        image = cv2.putText(image,detected_terrorist.getName(),(a,c),cv2.FONT_HERSHEY_PLAIN,1,(255,255,255),2,cv2.LINE_AA)
+        image = cv2.putText(image,detected_terrorist.getName(),(a+12,c+12),cv2.FONT_HERSHEY_PLAIN,1,(255,255,255),1,cv2.LINE_AA)
 
-    try:
-        result = auth.sign_in_with_email_and_password(username,password)
-        return render_template("detect.html",site = site)
-
-    except Exception as e:
-        return render_template("error.html",error = e)
+    return dumps({"img":getEncodedImage(".png",image),"faces":site["faces"],"objects":site["objects"]})
 
 
 @app.route("/object/{weapon}")
@@ -141,6 +168,8 @@ def getEncodedImage(type_,img):
 
 @app.route("/uploadFace",methods=["POST"])
 def uploadFace():
+    global data 
+
     img = request.files["file"]
 
     print("Decoding...")
@@ -159,8 +188,8 @@ def uploadFace():
     print("Locating Face...")
     
     for location in face_locations(image):
-        a,b,c,d = location(image)
-        image = cv2.rectangle(image,(d,a),(b,c),(51,255,255),3)
+        a,b,c,d = location
+        image = cv2.rectangle(image,(d,a),(b,c),(51,255,255),1)
     
     if len_face_encodings > 1:
         return dumps({"error":"More than one face found.","img":getEncodedImage(".png",image)})
@@ -183,8 +212,10 @@ def uploadFace():
     terrorist.setGroup(group)
     terrorist.setCountry(residence)
     terrorist.setId(len(data))
+    terrorist.saveFaceEncodings(face_encoding[0])
 
     data.append(terrorist)
+    known_face_encodings.append(face_encoding[0])
 
     with open(dataPathFace,"wb") as file:
         pickle.dump(data,file)

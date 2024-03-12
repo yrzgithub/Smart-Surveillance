@@ -13,7 +13,7 @@
 
     <body>
 
-        <img class="detectImg" src="https://firebasestorage.googleapis.com/v0/b/smart-surveillance-37cd5.appspot.com/o/image.jpg?alt=media&token=74ea648b-3d1c-4a3b-aeec-6ba192ae4e3c">
+        <img class="detectImg" id="detectImg" onload="setTimeout(process,20000)" src="https://firebasestorage.googleapis.com/v0/b/smart-surveillance-37cd5.appspot.com/o/image.jpg?alt=media&token=74ea648b-3d1c-4a3b-aeec-6ba192ae4e3c">
 
         <table class="result">
 
@@ -25,28 +25,33 @@
 
             <tr>
                 <td>
+
                     Face Detections&nbsp; <a style="font-size: 1rem;" href="addFace">new</a>
+
                 </td>
 
                 <td>
-                    {%for face in site["faces"]%}
 
-                    <a target="_blank" href="face/waltor">
-                        
-                    </a>
+                    <ol id="ol">
 
-                    {%endfor%}
-                     
+                    </ol>
+
                 </td>
             </tr>
 
             <tr>
                 <td>
+
                     Object Detections&nbsp; <a style="font-size: 1rem;" href="addFace">new</a>
+
                 </td>
 
                 <td>
-                    <a  target="_blank" href="object/akm">AKM</a>
+
+                    <a  target="_blank" href="object/akm">
+
+                    </a>
+
                 </td>
             </tr>
 
