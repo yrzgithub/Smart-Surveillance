@@ -53,7 +53,7 @@ if isfile(dataPathFace):
         file.close()
 
 
-known_face_encodings = [terrorist for terrorist in data]
+known_face_encodings = [terrorist.getFaceEncodings() for terrorist in data]
 
 
 
@@ -75,6 +75,8 @@ def home():
 
 @app.route("/detect",methods=["POST"])
 def detect():
+    site = {}
+
     form = request.form 
     username = form["username"].strip()
     password = form["password"].strip()
@@ -91,17 +93,27 @@ def detect():
         a,b,c,d = location 
         image = cv2.rectangle(image,(d,a),(b,c),(51,225,225),3)
 
-
     bboxs,labels,confs = yolo.detect_objects(image)
     image = draw_bbox(image,bboxs,labels,confs,(193,182,225),True)
 
+    site["objects"] = labels
+    site["faces"] = []
 
-    faces = compare_faces()
-
+    for encodings in face_encodings:
+        faceList = face_distance(known_face_encodings,encodings)
+        maximum = max(faceList)
+        if maximum < 0.6:
+            break 
+        index = faceList.index(maximum)
+        location = locations[index]
+        detected_terrorist = data[index]
+        site["faces"].append(detected_terrorist.getName())
+        (a,b,c,d) = location
+        image = cv2.putText(image,detected_terrorist.getName(),(a,c),cv2.FONT_HERSHEY_PLAIN,1,(255,255,255),2,cv2.LINE_AA)
 
     try:
         result = auth.sign_in_with_email_and_password(username,password)
-        return render_template("detect.html")
+        return render_template("detect.html",site = site)
 
     except Exception as e:
         return render_template("error.html",error = e)
