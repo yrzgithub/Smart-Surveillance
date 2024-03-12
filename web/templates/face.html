@@ -6,7 +6,7 @@
         <meta charset="utf-8" name="viewport" content="width=device-width,initial-scale=1"/>
         <title>Dark Hand</title>
         <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkbJZ1GrmwzM_pPqlz5zJimqQzaNViEW3kpQ&usqp=CAU">
-        <link rel="stylesheet" href="static\css\face.css">
+        <link rel="stylesheet" href="{{url_for('static',filename = '/css/face.css')}}">
         <script src="static/js/face.js"></script>
 
     </head>
@@ -29,7 +29,7 @@
                 </td>
 
                 <td>
-                    name
+                    {{terrorist.getName()}}
                 </td>
             </tr>
 
@@ -39,17 +39,7 @@
                 </td>
 
                 <td>
-                    age
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    Gender
-                </td>
-
-                <td>
-                    gender
+                    {{terrorist.getAge()}}
                 </td>
             </tr>
 
@@ -59,7 +49,7 @@
                 </td>
 
                 <td>
-                    country
+                    {{terrorist.getCountry()}}
                 </td>
             </tr>
 
@@ -69,7 +59,7 @@
                 </td>
 
                 <td>
-                    group
+                    {{terrorist.getGroup()}}
                 </td>
             </tr>
 
@@ -79,7 +69,7 @@
                 </td>
 
                 <td>
-                    religion
+                    {{terrorist.getReligion()}}
                 </td>
             </tr>
 
@@ -89,7 +79,7 @@
                 </td>
 
                 <td>
-                    position
+                    {{terrorist.getPosition()}}
                 </td>
             </tr>
 
@@ -99,7 +89,7 @@
                 </td>
 
                 <td>
-                    illness
+                    {{terrorist.getIllness()}}
                 </td>
             </tr>
 

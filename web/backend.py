@@ -77,6 +77,10 @@ def home():
 @app.route("/detect",methods=["POST"])
 def detect():
 
+    global prev 
+
+    prev = None
+
     form = request.form 
     username = form["username"].strip()
     password = form["password"].strip()
@@ -101,12 +105,12 @@ def getimage():
 
     content = get(imgUrl).content
 
-    image = cv2.imdecode(np.frombuffer(bytearray(content),np.uint8),cv2.IMREAD_COLOR)
-
     if prev == content:
         return dumps({"error":"alerady processed"})
-
+    
     prev = content
+
+    image = cv2.imdecode(np.frombuffer(bytearray(content),np.uint8),cv2.IMREAD_COLOR)
 
     print("Encoding faces...")
 
@@ -146,14 +150,17 @@ def getimage():
     return dumps({"img":getEncodedImage(".png",image),"faces":site["faces"],"objects":site["objects"]})
 
 
-@app.route("/object/{weapon}")
+@app.route("/object/<weapon>")
 def obj(weapon):
     return render_template("obj.html")
 
 
-@app.route("/face/{face}")
+@app.route("/face/<face>")
 def face(face):
-    return render_template("face.html")
+    print(face)
+    name =  list(filter(lambda terror : terror.getName() == face,data))[0]
+    print(name)
+    return render_template("face.html",terrorist = name)
 
 
 @app.route("/addFace")
