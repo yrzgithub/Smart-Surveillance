@@ -17,5 +17,6 @@ url = "https://source.unsplash.com/random?" + name
 for i in range(start,count):
     with open(join(folder,str(i)+".png"),"wb") as file:
         print(i)
+        
         file.write(get(url).content)
         file.close()
