@@ -13,11 +13,11 @@ config = "models\yolo-tiny-obj.cfg"
 labels = "models\obj.names"
 
 
-test = abspath("D:\My Apps\ObjectDetectionCode\images\military aircraft")
-download = abspath("test\images\download")
+test = abspath("D:\My Apps\ObjectDetectionCode\images\military troops").replace("\\","\\\\")
+imgs = abspath("D:\\My Apps\\Surveillance\\test\\images")
 
 
-use_web = 1
+use_web = 0
 
 
 model = YOLO(weights=weights,config=config,labels=labels,version="yolo-tiny")
@@ -35,16 +35,25 @@ def rectangle(img):
 
 
 if use_web:
-    name = input("Enter the query : ")
-    url = "https://source.unsplash.com/random?" + name 
+    name = "Military Jet" # input("Enter the query : ")
+    url = "https://source.unsplash.com/random?" + name
 
-    index = 0
+    index = 10
+
     while True:
         index += 1
         image = cv2.imdecode(numpy.frombuffer(bytearray(get(url).content),numpy.uint8),cv2.IMREAD_COLOR)
+        sample = image.copy()
         image,bboxs,labels,confidences = rectangle(image)
-        # print(cv2.imwrite(f"{download}\\{index}.png",image))
-        cv2.imshow("Frame",image)
+
+        if len(labels)==0:
+            cv2.imshow("Rectangle",image)
+            cv2.waitKey(100)
+            continue
+
+        print(cv2.imwrite(f"{imgs}\\rectangle\\{name} {index}.png",image))
+        print(cv2.imwrite(f"{imgs}\\sample\\{name} {index}.png",sample))
+        cv2.imshow("Rectangle",image)
         cv2.waitKey(100)
 
         if is_pressed("esc"):
@@ -52,20 +61,26 @@ if use_web:
             exit(0)
 
 
-files = listdir(test)
-print(len(files),"images found")
+if isdir(test):
+    files = listdir(test)
+    print(len(files),"images found")
+
+else:
+    files = []
+    makedirs(test)
 
 
 n = 0
+name = test.split("\\")[-1]
 for file in files:
 
     if is_pressed("esc"):
         break
 
     img = cv2.imread(join(test,file))
-
-    if type(img) == None:
-        continue
+    if type(img) != numpy.ndarray : continue 
+    print(type(img))
+    copy = img.copy()
 
     img,bboxs,labels,confidences = rectangle(img)
 
@@ -76,9 +91,8 @@ for file in files:
         bbox = bboxs[index]
         confidence = confidences[index]
 
-        print(label,confidence)
-
-    print(cv2.imwrite(f"{download}\\{n}.png",img))
+    print(cv2.imwrite(f"{imgs}\\rectangle\\{name} {n}.png",img))
+    print(cv2.imwrite(f"{imgs}\\sample\\{name} {n}.png",copy))
 
     cv2.imshow("Frame",img)
  
