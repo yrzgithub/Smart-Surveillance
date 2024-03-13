@@ -31,4 +31,4 @@ for file in files:
         print(label,confidence)
 
     cv2.imshow("Frame",img)
-    cv2.waitKey(100)
+    cv2.waitKey(0)

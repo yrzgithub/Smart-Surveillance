@@ -1,5 +1,8 @@
 .detectImg {
     object-fit:contain;
+    border: 1px solid black;
+    padding-top: 1%;
+    padding-bottom: 1%;
     width: 50%;
     height: 80%;
     position: absolute;

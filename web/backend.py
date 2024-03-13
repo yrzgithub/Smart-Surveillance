@@ -152,14 +152,13 @@ def getimage():
 
 @app.route("/object/<weapon>")
 def obj(weapon):
-    return render_template("obj.html")
+    name =  list(filter(lambda terror : terror.getName() == weapon,data))[0]
+    return render_template("obj.html",weapon = name)
 
 
 @app.route("/face/<face>")
 def face(face):
-    print(face)
     name =  list(filter(lambda terror : terror.getName() == face,data))[0]
-    print(name)
     return render_template("face.html",terrorist = name)
 
 
@@ -211,6 +210,8 @@ def uploadFace():
     group = args["group"]
     residence = args["residence"]
 
+    encoded = getEncodedImage(".png",image)
+
     terrorist = Terrorist(name)
     terrorist.setAge(age)
     terrorist.setReligion(religion)
@@ -220,6 +221,7 @@ def uploadFace():
     terrorist.setCountry(residence)
     terrorist.setId(len(data))
     terrorist.saveFaceEncodings(face_encoding[0])
+    terrorist.setImg(encoded)
 
     data.append(terrorist)
     known_face_encodings.append(face_encoding[0])
@@ -231,7 +233,7 @@ def uploadFace():
     print("Writing Image...")
     cv2.imwrite(f"data\\faces\\{terrorist.id}.png",image)
 
-    return dumps({"msg":"Image Uploaded","img":getEncodedImage(".png",image)})
+    return dumps({"msg":"Image Uploaded","img":encoded})
 
 
 
