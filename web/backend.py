@@ -107,9 +107,10 @@ def getimage():
     content = get(imgUrl).content
 
     if prev == content:
-        return dumps({"error":"alerady processed"})
+        return dumps({"error":"already processed"})
     
     prev = content
+    print("Change Detected")
 
     image = cv2.imdecode(np.frombuffer(bytearray(content),np.uint8),cv2.IMREAD_COLOR)
 
@@ -128,8 +129,13 @@ def getimage():
     print("Detecting Objects...")
 
     bboxs,labels,confs = yolo.detect_objects(image)
-    image = draw_bbox(image,bboxs,labels,confs,(193,182,225),True)
+    print(confs)
 
+    for index,box in enumerate(bboxs):
+        a,b,c,d = box
+        image = cv2.rectangle(image,(a,b),(c,d),(51,225,225),1)
+        image = cv2.putText(image,labels[index],(c-50,d+30),fontScale=2,fontFace=cv2.FONT_HERSHEY_PLAIN,color=(0,0,225),thickness=1,lineType=cv2.LINE_AA)
+    
     site["objects"] = labels
     site["faces"] = []
 
@@ -137,7 +143,7 @@ def getimage():
 
     for encodings in fencodings:
         faceList = list(face_distance(known_face_encodings,encodings))
-        print(faceList)
+        print("Distance",faceList)
         minumum = min(faceList)
         if minumum >= 0.6:
             break 
@@ -190,7 +196,7 @@ def uploadObj():
     portability = args["portability"].strip()
     range = args["range"].strip()
     accuracy = args["accuracy"].strip()
-    type = args["type"].strip()
+    tpe = args["type"].strip()
     power = args["power"].strip()
 
     weapon = Weapon(name)
@@ -198,7 +204,7 @@ def uploadObj():
     weapon.setPortability(portability)
     weapon.setRange(range)
     weapon.setAccuracy(accuracy)
-    weapon.setType(type)
+    weapon.setType(tpe)
     weapon.setPower(power)
 
     objects = []
