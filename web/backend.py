@@ -30,6 +30,7 @@ conf = "models\yolo-tiny-obj.cfg"
 weights = "models\yolo-tiny-obj.weights"
 labels = "models\obj.names"
 dataPathFace = abspath("data\dataFace.pkl")
+dataPathObj = abspath("data\dataObj.pkl")
 pathFaces = abspath("data\\faces")
 
 
@@ -167,9 +168,53 @@ def addImg():
     return render_template("addFace.html")
 
 
+@app.route("/addObj")
+def addObj():
+    return render_template("addObj.html")
+
+
 def getEncodedImage(type_,img):
     image = f"data:{type_};base64," + b64encode(cv2.imencode(type_,img)[1]).decode()
     return image
+
+
+@app.route("/uploadObj",methods=["POST"])
+def uploadObj():
+
+    args = request.form
+
+    image = request.files["file"]
+
+    name = args["name"].strip()
+    color = args["color"].strip()
+    portability = args["portability"].strip()
+    range = args["range"].strip()
+    accuracy = args["accuracy"].strip()
+    type = args["type"].strip()
+    power = args["power"].strip()
+
+    weapon = Weapon(name)
+    weapon.setColor(color)
+    weapon.setPortability(portability)
+    weapon.setRange(range)
+    weapon.setAccuracy(accuracy)
+    weapon.setType(type)
+    weapon.setPower(power)
+
+    objects = []
+
+    if isfile(dataPathObj):
+        with open(dataPathObj,"rb") as file:
+            objects.extend(pickle.load(file))
+            file.close() 
+    
+    objects.append(weapon)
+
+    with open(dataPathObj,"wb") as file:
+        pickle.dump(objects,file)
+        file.close()
+
+    return dumps({})
 
 
 @app.route("/uploadFace",methods=["POST"])

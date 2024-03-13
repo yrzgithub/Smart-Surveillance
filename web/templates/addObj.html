@@ -7,6 +7,7 @@
         <title>Dark Hand</title>
         <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkbJZ1GrmwzM_pPqlz5zJimqQzaNViEW3kpQ&usqp=CAU">
         <link rel="stylesheet" href="static\css\addObj.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="static\js\addObj.js"></script>
 
     </head>
@@ -15,31 +16,35 @@
 
         <div class="getImg">
 
-            <img id="upload" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyHlhRBUevbh8DcWe7o5epTHj3PS0o7vsV1A&usqp=CAU">
-            <input onchange="put(event)" accept="image/*" type="file"> 
+            <img id="upload" src="https://i.pinimg.com/originals/4c/92/cc/4c92ccc8320425987b938a8ab79aa84f.gif">
+            <input id="file" onchange="put(event)" accept="image/*" type="file"> 
 
         </div>
 
-        <div class="obj">
+        <form onsubmit="upload(event)" method="post" enctype="multipart/form-data" class="obj">
 
-            <input placeholder="Name">
+            <input id="name" placeholder="Name">
             <br>
-            <input placeholder="Color">
+            <input id="color" placeholder="Color">
             <br>
-            <input placeholder="Type">
+            <input id="type" placeholder="Type">
             <br>
-            <input placeholder="Power">
+            <input id="power" placeholder="Power">
             <br>
-            <input placeholder="Accuracy">
+            <input id="accuracy" placeholder="Accuracy">
             <br>
-            <input placeholder="Range">
+            <input id="range" placeholder="Range">
             <br>
-            <input placeholder="Reliability">
-            <br>
-            <input placeholder="Portability">
-            
+            <input id="portability" placeholder="Portability">
 
-        </div>
+            <button id="uploadbtn">
+                
+                <i id="spinner"></i>
+                <span id="button">Upload</span>
+
+            </button>
+
+        </form>
 
         </table>
         

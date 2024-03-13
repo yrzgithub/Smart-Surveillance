@@ -106,27 +106,20 @@ class Terrorist:
 class Weapon:
 
     name = ""
-    img = None
     color = ""
     type = ""
     power = ""
     accuracy = ""
     range = ""
-    reliability = ""
     portability = ""
 
 
-    def __init__(self,name,img):
+    def __init__(self,name):
         self.name = name
-        self.img = img
 
 
     def getName(self):
         return self.name 
-    
-
-    def getImg(self):
-        return self.img 
     
 
     def getColor(self):
@@ -149,20 +142,12 @@ class Weapon:
         return self.range 
     
 
-    def getReliability(self):
-        return self.reliability 
-    
-
     def getPortability(self):
         return self.portability
     
 
     def setName(self,name):
         self.name = name
-    
-
-    def setImg(self,img):
-        self.img = img
     
 
     def setColor(self,color):
@@ -183,10 +168,6 @@ class Weapon:
 
     def setRange(self,range):
         self.range = range
-    
-
-    def setReliability(self,reliability):
-        self.reliability = reliability
     
 
     def setPortability(self,portability):
