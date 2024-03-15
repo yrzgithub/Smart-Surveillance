@@ -1,12 +1,7 @@
 .detectImg {
-    width: 48%;
-    height: 80%;
-    padding: 1%;
     border: 1px solid black;
     object-fit: contain;
     position: absolute;
-    top: 50%;
-    left: 3%;
     transform: translateY(-50%);
 }
 
@@ -46,4 +41,22 @@ td {
     padding-top: 3%;
     padding-bottom: 3%;
     padding-left: 5%;
+}
+
+@media screen and (min-width:320px) and (max-width:768px) {           /* Mobile */
+
+
+
+}
+
+@media screen and (min-width:769px) {                                  /* Desktop */ 
+
+    .detectImg {
+        width: 48%;
+        height: 80%;
+        padding: 1%;
+        top: 50%;
+        left: 3%;
+    }
+
 }
