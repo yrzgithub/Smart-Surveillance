@@ -41,5 +41,7 @@ th {
 
 th,td {
     width: 50%;
-    padding: 3%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    padding-left: 5%;
 }

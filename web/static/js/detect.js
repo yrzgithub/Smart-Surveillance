@@ -16,16 +16,27 @@ async function process()
             return;
         }
 
-        orderedlist.innerHTML = "";
-        orderedlistObj.innerHTML = "";
-
         var image = response.img;
         var faces = response.faces;
         var objects = response.objects;
 
-        console.log(faces.length);
+        var flen = faces.length;
+        var olen = objects.length;
 
-        for(let index=0;index<faces.length;++index)
+        orderedlist.innerHTML = "";
+        orderedlistObj.innerHTML = "";
+
+        if(flen==0)
+        {
+            orderedlist.innerHTML = "Not Found";
+        }
+
+        if(olen==0)
+        {
+            orderedlistObj.innerHTML = "Not Found";
+        }
+
+        for(let index=0;index<flen;++index)
         {
             let face = faces[index];
 
@@ -41,7 +52,7 @@ async function process()
             orderedlist.appendChild(li);
         }
 
-        for(let index=0;index<objects.length;++index)
+        for(let index=0;index<olen;++index)
         {
             var obj = objects[index];
 
