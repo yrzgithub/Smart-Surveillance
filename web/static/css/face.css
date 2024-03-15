@@ -1,8 +1,7 @@
 .detectImg {
-    width: 50%;
+    width: 48%;
     height: 80%;
-    padding-top: 1%;
-    padding-bottom: 1%;
+    padding: 1%;
     border: 1px solid black;
     object-fit: contain;
     position: absolute;
@@ -21,7 +20,7 @@ a {
 
 .terrorist {
     position: absolute;
-    left: 50%;
+    right: 3%;
     top: 50%;
     transform: translateY(-50%);
     width: 40%;

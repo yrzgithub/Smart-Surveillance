@@ -151,6 +151,8 @@ def getimage():
     print("Recognizing...")
 
     for encodings in fencodings:
+        if len(known_face_encodings)==0:
+            break
         faceList = list(face_distance(known_face_encodings,encodings))
         print("Distance",faceList)
         minumum = min(faceList)
@@ -169,15 +171,13 @@ def getimage():
 
 @app.route("/weapon/<weapon>")
 def obj(weapon):
-    name =  list(filter(lambda wpn: wpn.getName() == weapon,weapons))
-    wpn = name[0]
-    print(wpn.image)
-    return render_template("obj.html",weapon = wpn)
+    name =  weapons[weapon]
+    return render_template("obj.html",weapon = name)
 
 
 @app.route("/face/<face>")
 def face(face):
-    name =  data["face"]
+    name =  data[face]
     return render_template("face.html",terrorist = name)
 
 
@@ -198,6 +198,8 @@ def getEncodedImage(type_,img):
 
 @app.route("/uploadObj",methods=["POST"])
 def uploadObj():
+
+    global weapons
 
     args = request.form
 
@@ -222,22 +224,19 @@ def uploadObj():
     weapon.setPower(power)
     weapon.setImage(img)
 
-    objects = []
-
     if isfile(dataPathObj):
         with open(dataPathObj,"rb") as file:
             objs = pickle.load(file)
-            objects.extend(objs)
+            weapons.update(objs)
             file.close() 
     
-    if weapon.getName() in [ojs.getName() for ojs in objs]:
-        print("Removing...")
-        objects.remove()
+    if name in weapons:
+        weapons.pop(name)
     
-    objects.append(weapon)
+    weapons.update({name:weapon})
 
     with open(dataPathObj,"wb") as file:
-        pickle.dump(objects,file)
+        pickle.dump(weapons,file)
         file.close()
 
     return dumps({})
@@ -266,7 +265,7 @@ def uploadFace():
     
     for location in face_locations(image):
         a,b,c,d = location
-        image = cv2.rectangle(image,(d,a),(b,c),(51,255,255),1)
+        image = cv2.rectangle(image,(d,a),(b,c),(51,255,255),2)
     
     if len_face_encodings > 1:
         return dumps({"error":"More than one face found.","img":getEncodedImage(".png",image)})
