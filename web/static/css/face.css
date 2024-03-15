@@ -37,9 +37,11 @@ table,tr,th,td {
 
 th {
     font-size: 2rem;
+    width: 50%;
+    padding: 3%;
 }
 
-th,td {
+td {
     width: 50%;
     padding-top: 3%;
     padding-bottom: 3%;

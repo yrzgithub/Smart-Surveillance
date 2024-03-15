@@ -7,13 +7,14 @@
         <title>Dark Hand</title>
         <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkbJZ1GrmwzM_pPqlz5zJimqQzaNViEW3kpQ&usqp=CAU">
         <link rel="stylesheet" href="static\css\home.css">
-        <script src="static/js/home.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="{{url_for('static',filename='/js/home.js')}}"></script>
 
     </head>
 
     <body>
 
-        <form id="loginForm" action="detect" method="post" class="loginForm">
+        <form id="loginForm" onsubmit="login()" action="detect" method="post" class="loginForm">
 
             <div class="credentials">
                 <input type="text" id="username" name="username" placeholder="Username or E-mail">
@@ -22,33 +23,12 @@
     
             <a href="forget">Forget Password</a>
     
-            <button id="submit" type="submit">Login</button>
+            <button id="submit" type="submit">
 
-            <script>
+                <i id="spinner"></i>
+                <span id="button">Login</span>
 
-                var submit = document.getElementById("loginForm");
-                submit.onsubmit = (handler,event) => {
-                    
-                    var username = document.getElementById("username").value.trim();
-                    var password = document.getElementById("password").value.trim();
-
-                    console.log(username,password);
-
-                    if(username=="")
-                    {
-                        alert("Username cannot be empty.");
-                        return false;
-                    }
-
-                    if(password=="")
-                    {
-                        alert("password cannot be empty.");
-                        return false;
-                    }
-                };
-                
-
-            </script>
+            </button>
 
         </form>
 
