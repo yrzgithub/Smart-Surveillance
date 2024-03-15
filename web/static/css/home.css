@@ -3,63 +3,102 @@
     flex-direction: column;
 }
 
+body {
+    background-image: url("https://t4.ftcdn.net/jpg/05/18/13/21/360_F_518132106_Qib4GXPoMJGTKdFVHr8AzqE1SepQZYtw.jpg");
+    background-size: 100%;
+}
+
 .loginForm {
     display: flex;
     border: 2px solid black;
     border-radius: 12px;
     position: absolute;
-    top: 50%;
-    left: 30%;
     background-color:whitesmoke;
     transform: translate(-50%,-50%);
     flex-direction: column;
 }
 
-.credentials input {
-    padding: 3%;
-    font-size: 1.2rem;
-    border-radius: 10px;
-    margin-top: 6%;
-}
-
-.loginForm a {
-    font-size: 1.2rem;
-    margin-top: 8%;
-}
-
 .loginForm button {
-    width: 90%;
-    font-size: 1.2rem;
-    margin-bottom: 6%;
-    margin-top: 10%;
     align-self: center;
     border-radius: 10px;
     border: 2px solid blue;
     color: white;
     cursor: pointer;
     background-color: blue;
-    padding: 1.2%;
     font-weight: bold;
 }
 
 @media screen and (min-width:320px) and (max-width:768px) {           /* Mobile */
+
     .loginForm {
-        width: 50%;
+        width: 90%;
+        top: 50%;
+        left: 50%;
+        height: 50%;
+        padding-top: 2%;
+        padding-bottom: 2%;
+        padding-left: 2%;
+        padding-right: 2%;
+        justify-content: center;
     }
+
+    .credentials input {
+        padding-left: 3%;
+        padding-top: 4%;
+        padding-bottom: 4%;
+        margin-left: 2%;
+        margin-right: 2%;
+        font-size: 1rem;
+        border-radius: 10px;
+        margin-top: 8%;
+    }
+
+    .loginForm a {
+        font-size: 1rem;
+        margin-top: 8%;
+        margin-left: 3%;
+    }    
+
+    .loginForm button {
+        width: 90%;
+        font-size: 1rem;
+        margin-bottom: 6%;
+        margin-top: 10%;
+        padding: 2%;
+    }
+
 }
 
 @media screen and (min-width:769px) {                                  /* Desktop */
+
     .loginForm {
         width: 30%;
         padding-top: 2%;
         padding-bottom: 2%;
         padding-left: 2%;
         padding-right: 2%;
+        top: 50%;
+        left: 30%;
     }
 
-    body {
-        background-image: url("https://t4.ftcdn.net/jpg/05/18/13/21/360_F_518132106_Qib4GXPoMJGTKdFVHr8AzqE1SepQZYtw.jpg");
-        background-repeat: no-repeat;
-        background-size: 100%;
+    .credentials input {
+        padding: 3%;
+        font-size: 1.2rem;
+        border-radius: 10px;
+        margin-top: 6%;
     }
+
+    .loginForm a {
+        font-size: 1.2rem;
+        margin-top: 8%;
+    }
+
+    .loginForm button {
+        width: 90%;
+        font-size: 1.2rem;
+        margin-bottom: 6%;
+        margin-top: 10%;
+        padding: 1.2%;
+    }
+
 }
