@@ -109,6 +109,7 @@ class Weapon:
     color = ""
     type = ""
     power = ""
+    image = ""
     accuracy = ""
     range = ""
     portability = ""
@@ -144,6 +145,14 @@ class Weapon:
 
     def getPortability(self):
         return self.portability
+    
+
+    def getImage(self):
+        return self.image
+    
+
+    def setImage(self,image):
+        self.image = image
     
 
     def setName(self,name):

@@ -6,14 +6,19 @@
         <meta charset="utf-8" name="viewport" content="width=device-width,initial-scale=1"/>
         <title>Dark Hand</title>
         <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkbJZ1GrmwzM_pPqlz5zJimqQzaNViEW3kpQ&usqp=CAU">
-        <link rel="stylesheet" href="static\css\obj.css">
-        <script src="static\js\obj.js"></script>
+        <link rel="stylesheet" href="{{url_for('static',filename = 'css/obj.css')}}">
 
     </head>
 
     <body>
 
-        <img class="detectImg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQL1nU80V0pRvzvheWQKvIjsWLlrQ_jQDkT2H9JEOBy0mLc2d_MCw_WEvUzYhlLxxiLmUQ&usqp=CAU">
+        <script>
+
+            console.log("{{weapon.image}}");
+
+        </script>
+
+        <img class="detectImg" src="{{weapon.image}}">
 
         <table class="obj">
 
@@ -29,7 +34,7 @@
                 </td>
 
                 <td>
-                    name
+                    {{weapon.name}}
                 </td>
             </tr>
 
@@ -39,7 +44,7 @@
                 </td>
 
                 <td>
-                    color
+                    {{weapon.color}}
                 </td>
             </tr>
 
@@ -49,7 +54,7 @@
                 </td>
 
                 <td>
-                    type
+                    {{weapon.type}}
                 </td>
             </tr>
 
@@ -59,7 +64,7 @@
                 </td>
 
                 <td>
-                    power
+                    {{weapon.power}}
                 </td>
             </tr>
 
@@ -69,7 +74,7 @@
                 </td>
 
                 <td>
-                    accuracy
+                    {{weapon.accuracy}}
                 </td>
             </tr>
 
@@ -79,17 +84,7 @@
                 </td>
 
                 <td>
-                    range
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    Reliability
-                </td>
-
-                <td>
-                    reliability
+                    {{weapon.range}}
                 </td>
             </tr>
 
@@ -99,7 +94,7 @@
                 </td>
 
                 <td>
-                    portability
+                    {{weapon.portability}}
                 </td>
             </tr>
 

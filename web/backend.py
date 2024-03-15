@@ -39,7 +39,8 @@ prev = None
 
 
 
-data = []
+data = {}
+weapons = {}
 
 if not isdir("data"):
     makedirs("data")
@@ -51,11 +52,19 @@ if not isdir(pathFaces):
 if isfile(dataPathFace):
     with open(dataPathFace,"rb") as file:
         fd = pickle.load(file)
-        data.extend(fd)
+        data.update(fd)
         file.close()
 
 
-known_face_encodings = [terrorist.getFaceEncodings() for terrorist in data]
+if isfile(dataPathObj):
+    with open(dataPathObj,"rb") as file:
+        fd = pickle.load(file)
+        weapons.update(fd)
+        file.close()
+
+
+
+known_face_encodings = [terrorist.getFaceEncodings() for name,terrorist in data.items()]
 
 
 
@@ -149,7 +158,8 @@ def getimage():
             break 
         index = faceList.index(minumum)
         location = locations[index]
-        detected_terrorist = data[index]
+        name = [name for name,terrorist in data.items()][index]
+        detected_terrorist = data[name]
         site["faces"].append(detected_terrorist.getName())
         (a,b,c,d) = location
         image = cv2.putText(image,detected_terrorist.getName(),(a+12,c+12),cv2.FONT_HERSHEY_PLAIN,1,(255,255,255),1,cv2.LINE_AA)
@@ -157,15 +167,17 @@ def getimage():
     return dumps({"img":getEncodedImage(".png",image),"faces":site["faces"],"objects":site["objects"]})
 
 
-@app.route("/object/<weapon>")
+@app.route("/weapon/<weapon>")
 def obj(weapon):
-    name =  list(filter(lambda terror : terror.getName() == weapon,data))[0]
-    return render_template("obj.html",weapon = name)
+    name =  list(filter(lambda wpn: wpn.getName() == weapon,weapons))
+    wpn = name[0]
+    print(wpn.image)
+    return render_template("obj.html",weapon = wpn)
 
 
 @app.route("/face/<face>")
 def face(face):
-    name =  list(filter(lambda terror : terror.getName() == face,data))[0]
+    name =  data["face"]
     return render_template("face.html",terrorist = name)
 
 
@@ -180,7 +192,7 @@ def addObj():
 
 
 def getEncodedImage(type_,img):
-    image = f"data:{type_};base64," + b64encode(cv2.imencode(type_,img)[1]).decode()
+    image = f"data:image/png;base64," + b64encode(cv2.imencode(type_,img)[1]).decode()
     return image
 
 
@@ -199,6 +211,8 @@ def uploadObj():
     tpe = args["type"].strip()
     power = args["power"].strip()
 
+    img = getEncodedImage(".png",cv2.imdecode(np.frombuffer(image.read(),np.uint8),cv2.IMREAD_COLOR))
+
     weapon = Weapon(name)
     weapon.setColor(color)
     weapon.setPortability(portability)
@@ -206,13 +220,19 @@ def uploadObj():
     weapon.setAccuracy(accuracy)
     weapon.setType(tpe)
     weapon.setPower(power)
+    weapon.setImage(img)
 
     objects = []
 
     if isfile(dataPathObj):
         with open(dataPathObj,"rb") as file:
-            objects.extend(pickle.load(file))
+            objs = pickle.load(file)
+            objects.extend(objs)
             file.close() 
+    
+    if weapon.getName() in [ojs.getName() for ojs in objs]:
+        print("Removing...")
+        objects.remove()
     
     objects.append(weapon)
 
@@ -274,7 +294,7 @@ def uploadFace():
     terrorist.saveFaceEncodings(face_encoding[0])
     terrorist.setImg(encoded)
 
-    data.append(terrorist)
+    data[name] = terrorist
     known_face_encodings.append(face_encoding[0])
 
     with open(dataPathFace,"wb") as file:

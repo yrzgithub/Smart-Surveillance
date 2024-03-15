@@ -49,6 +49,9 @@ FirebaseConfig configuration;
 
 void setup() {
   Serial.begin(115200);
+
+  pinMode(12,OUTPUT);
+  digitalWrite(12,HIGH);
   
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
@@ -61,7 +64,7 @@ void setup() {
  // initialize OV2640 camera module
   camera_config_t config;
   config.ledc_channel = LEDC_CHANNEL_0;
-  config.ledc_timer = LEDC_TIMER_0;
+  config.ledc_timer = LEDC_TIMER_0; 
   config.pin_d0 = Y2_GPIO_NUM;
   config.pin_d1 = Y3_GPIO_NUM;
   config.pin_d2 = Y4_GPIO_NUM;
