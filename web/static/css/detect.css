@@ -39,11 +39,11 @@ th,td {
     }
 
     .result {
-        bottom: 4%;
+        bottom: 5%;
         padding: 2%;
         left: 50%;
         transform: translateX(-50%);
-        height: 38%;
+        height: 36%;
         width: 90%;
     }
 
