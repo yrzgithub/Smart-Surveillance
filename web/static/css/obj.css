@@ -1,17 +1,9 @@
 .detectImg {
-    width: 48%;
-    height: 80%;
-    padding: 1%;
+    
     border: 1px solid black;
     object-fit: contain;
     position: absolute;
-    top: 50%;
-    left: 3%;
     transform: translateY(-50%);
-}
-
-body {
-    font-size: 1.5rem;
 }
 
 a {
@@ -20,14 +12,7 @@ a {
 
 .obj {
     position: absolute;
-    right: 3%;
-    top: 50%;
     transform: translateY(-50%);
-    width: 40%;
-}
-
-table {
-    margin-left: 6.5%;
 }
 
 table,tr,th,td {
@@ -35,15 +20,80 @@ table,tr,th,td {
     border-collapse: collapse;
 }
 
-th {
-    font-size: 2rem;
-    width: 50%;
-    padding: 3%;
+@media screen and (min-width:320px) and (max-width:768px) {           /* Mobile */
+
+    body {
+        font-size: 1rem;
+    }
+
+    .detectImg {
+        width: 85%;
+        height: 40%;
+        padding:2%;
+        left: 50%;
+        top:4%;
+        transform: translateX(-50%);
+    }
+
+    .obj {
+        bottom: 4.5%;
+        padding: 2%;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 45%;
+        width: 90%;
+    }
+
+    td ,ol {
+        padding-top:3%;
+        padding-bottom: 3%;
+        padding-left: 5%;
+        width:50%;
+    }
+
+    th {
+        font-size: 1.3rem;
+        padding: 4%;
+    }
+
 }
 
-td {
-    width: 50%;
-    padding-top: 3%;
-    padding-bottom: 3%;
-    padding-left: 5%;
+
+@media screen and (min-width:769px) {                                  /* Desktop */ 
+
+    .detectImg {
+        top: 50%;
+        left: 3%;
+        width: 48%;
+        height: 80%;
+        padding: 1%;
+    }
+
+    body {
+        font-size: 1.5rem;
+    }
+
+    .obj {
+        right: 3%;
+        top: 50%;
+        width: 40%;
+    }
+
+    table {
+        margin-left: 6.5%;
+    }
+
+    th {
+        font-size: 2rem;
+        width: 50%;
+        padding: 3%;
+    }
+    
+    td {
+        width: 50%;
+        padding-top: 3%;
+        padding-bottom: 3%;
+        padding-left: 5%;
+    }
+
 }
