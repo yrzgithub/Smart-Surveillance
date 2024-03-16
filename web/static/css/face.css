@@ -30,16 +30,16 @@ table,tr,th,td {
         height: 40%;
         padding:2%;
         left: 50%;
-        top:3%;
+        top:4%;
         transform: translateX(-50%);
     }
 
     .terrorist {
-        bottom: 3%;
+        bottom: 4.5%;
         padding: 2%;
         left: 50%;
         transform: translateX(-50%);
-        height: 48%;
+        height: 45%;
         width: 90%;
     }
 
