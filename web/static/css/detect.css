@@ -30,20 +30,21 @@ th,td {
     }
 
     .detectImg {
-        padding: 1%;
-        width: 90%;
-        height: 50%;
+        width: 85%;
+        height: 48%;
+        padding:2%;
         left: 50%;
+        top:4%;
         transform: translateX(-50%);
     }
 
     .result {
-        bottom: 8%;
+        bottom: 4%;
+        padding: 2%;
         left: 50%;
         transform: translateX(-50%);
-        height: 40%;
+        height: 38%;
         width: 90%;
-    
     }
 
     td ,ol {
