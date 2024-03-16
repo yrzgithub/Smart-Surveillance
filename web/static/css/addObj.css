@@ -1,74 +1,150 @@
 .getImg {
     position: absolute;
     border: 1px solid black;
-    top: 50%;
-    left:27%;
-    width: 46%;
     transform: translate(-50%,-50%);
 }
 
 .getImg input {
     opacity: 0;
-    padding-top : 40%;
-    padding-bottom: 40%;
-    width: 100%;
-    height: 100%;
 }
 
 .getImg img {
     position: absolute;
     object-fit: contain;
-    top: 50%;
-    left: 50%;
-    max-width: 95%;
-    max-height: 95%;
     transform: translate(-50%,-50%);
-}
-
-body {
-    font-size: 1.5rem;
 }
 
 .obj {
     position: absolute;
-    left: 52%;
-    top: 50%;
-    margin-left: 4%;
-    transform: translateY(-50%);
-    width: 40%;
 }
 
 .obj input {
     font-size: 1.2rem;
-    padding-left: 4%;
-    padding-top: 2.5%;
-    padding-bottom: 2.5%;
-    width: 95%;
-}
-
-.obj input:not(:first-child)
-{
-    margin-top: 3.5%;
 }
 
 .obj button {
     display: flex;
     justify-content: center;
     align-content: center;
-    width: 90%;
-    font-size: 1.2rem;
     border-radius: 10px;
     border: 2px solid blue;
     color: white;
     cursor: pointer;
     background-color: blue;
-    padding: 1.5%;
     font-weight: bold;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 6%;
 }
 
 .spinner {
     margin-right:5px;
+}
+
+@media screen and (min-width:320px) and (max-width:768px) {           /* Mobile */
+
+    .getImg {
+        top: 25%;
+        left:50%;
+        width: 90%;
+    }
+
+    .getImg input {
+        padding-top : 40%;
+        padding-bottom: 40%;
+        width: 100%;
+        height: 100%;
+    }
+
+    .getImg img {
+        top: 50%;
+        left: 50%;
+        max-width: 95%;
+        max-height: 95%;
+    }
+
+    .obj {
+        left: 50%;
+        top: 95%;
+        width: 90%;
+        transform:translate(-50%,-50%);
+    }
+
+    .obj input {
+        padding-left: 4%;
+        padding-top: 4%;
+        padding-bottom: 4%;
+        width: 95%;
+    }
+
+    .obj input:not(:first-child)
+    {
+        margin-top: 6%;
+    }
+
+    .obj button {
+        padding: 1.5%;
+        width: 95%;
+        font-size: 1.2rem;
+        margin-top: 20%;
+        margin-bottom: 20%;
+        border-radius: 10px;
+    }
+
+}
+
+
+@media screen and (min-width:769px) {                                  /* Desktop */ 
+
+    .getImg {
+        top: 50%;
+        left:27%;
+        width: 46%;
+    }
+
+    .getImg input {
+        padding-top : 40%;
+        padding-bottom: 40%;
+        width: 100%;
+        height: 100%;
+    }
+
+    .getImg img {
+        top: 50%;
+        left: 50%;
+        max-width: 95%;
+        max-height: 95%;
+    }
+
+    body {
+        font-size: 1.5rem;
+    }
+
+    .obj {
+        left: 52%;
+        top: 50%;
+        margin-left: 4%;
+        width: 40%;
+        transform: translateY(-50%);
+    }
+
+    .obj input {
+        padding-left: 4%;
+        padding-top: 2.5%;
+        padding-bottom: 2.5%;
+        width: 95%;
+    }
+
+    .obj input:not(:first-child)
+    {
+        margin-top: 3.5%;
+    }
+
+    .obj button {
+        padding: 1.5%;
+        width: 90%;
+        font-size: 1.2rem;
+        margin-top: 6%;
+        border-radius: 10px;
+    }
+
 }

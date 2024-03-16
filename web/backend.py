@@ -105,6 +105,11 @@ def detect():
         return render_template("error.html",error = e)
     
 
+@app.route("/forget")
+def forget():
+    return render_template("forget.html")
+    
+
 @app.route("/getimage")
 def getimage():
     global prev 
