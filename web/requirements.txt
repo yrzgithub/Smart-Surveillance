@@ -1,3 +1,4 @@
+cmake
 pyrebase4
 face_recognition
 cvlib
