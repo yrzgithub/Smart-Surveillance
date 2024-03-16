@@ -1,0 +1,5 @@
+pyrebase4
+face_recognition
+cvlib
+opencv-python
+numpy
