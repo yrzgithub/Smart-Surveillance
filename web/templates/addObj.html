@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+
+        <meta charset="utf-8" name="viewport" content="width=device-width,initial-scale=1"/>
+        <title>Dark Hand</title>
+        <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkbJZ1GrmwzM_pPqlz5zJimqQzaNViEW3kpQ&usqp=CAU">
+        <link rel="stylesheet" href="static\css\addObj.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="static\js\addObj.js"></script>
+
+    </head>
+
+    <body>
+
+        <div class="getImg">
+
+            <img id="upload" src="https://i.pinimg.com/originals/4c/92/cc/4c92ccc8320425987b938a8ab79aa84f.gif">
+            <input id="file" onchange="put(event)" accept="image/*" type="file"> 
+
+        </div>
+
+        <form onsubmit="upload(event)" method="post" enctype="multipart/form-data" class="obj">
+
+            <input id="name" placeholder="Name">
+            <br>
+            <input id="color" placeholder="Color">
+            <br>
+            <input id="type" placeholder="Type">
+            <br>
+            <input id="power" placeholder="Power">
+            <br>
+            <input id="accuracy" placeholder="Accuracy">
+            <br>
+            <input id="range" placeholder="Range">
+            <br>
+            <input id="portability" placeholder="Portability">
+
+            <button id="uploadbtn">
+                
+                <i id="spinner"></i>
+                <span id="button">Upload</span>
+
+            </button>
+
+        </form>
+
+        </table>
+        
+    </body>
+
+</html>

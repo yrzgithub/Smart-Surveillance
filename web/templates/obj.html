@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+
+        <meta charset="utf-8" name="viewport" content="width=device-width,initial-scale=1"/>
+        <title>Dark Hand</title>
+        <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkbJZ1GrmwzM_pPqlz5zJimqQzaNViEW3kpQ&usqp=CAU">
+        <link rel="stylesheet" href="{{url_for('static',filename = 'css/obj.css')}}">
+
+    </head>
+
+    <body>
+
+        <script>
+
+            console.log("{{weapon.image}}");
+
+        </script>
+
+        <img class="detectImg" src="{{weapon.image}}">
+
+        <table class="obj">
+
+            <tr>
+                <th colspan="2">
+                    Weapon
+                </th>
+            </tr>
+
+            <tr>
+                <td>
+                    Name
+                </td>
+
+                <td>
+                    {{weapon.name}}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Color
+                </td>
+
+                <td>
+                    {{weapon.color}}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Type
+                </td>
+
+                <td>
+                    {{weapon.type}}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Power
+                </td>
+
+                <td>
+                    {{weapon.power}}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Accuracy
+                </td>
+
+                <td>
+                    {{weapon.accuracy}}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Range
+                </td>
+
+                <td>
+                    {{weapon.range}}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Portability
+                </td>
+
+                <td>
+                    {{weapon.portability}}
+                </td>
+            </tr>
+
+        </table>
+        
+    </body>
+
+</html>

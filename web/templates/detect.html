@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+
+        <meta charset="utf-8" name="viewport" content="width=device-width,initial-scale=1"/>
+        <title>Dark Hand</title>
+        <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkbJZ1GrmwzM_pPqlz5zJimqQzaNViEW3kpQ&usqp=CAU">
+        <link rel="stylesheet" href="static\css\detect.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="static/js/detect.js"></script>
+
+    </head>
+
+    <body>
+
+        <img class="detectImg" id="detectImg" src="https://firebasestorage.googleapis.com/v0/b/smart-surveillance-37cd5.appspot.com/o/image.jpg?alt=media&token=74ea648b-3d1c-4a3b-aeec-6ba192ae4e3c">
+
+        <script>
+
+            setInterval(process,10000);
+
+        </script>
+
+        <table class="result">
+
+            <tr>
+                <th colspan="2">
+                    Results
+                </th>
+            </tr>
+
+            <tr>
+                <td>
+
+                    Face Detections&nbsp; <a style="font-size: 1rem;" href="addFace">new</a>
+
+                </td>
+
+                <td>
+
+                    <ol id="ol">
+
+                        Recognizing...
+
+                    </ol>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+
+                    Object Detections&nbsp; <a style="font-size: 1rem;" href="addObj">new</a>
+
+                </td>
+
+                <td>
+
+                    <ol id="olo">
+
+                        Detecting...
+
+                    </ol>
+
+                </td>
+            </tr>
+
+        </table>
+
+    </body>
+
+</html>

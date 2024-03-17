@@ -1,0 +1,97 @@
+.detectImg {
+    border: 1px solid black;
+    object-fit: contain;
+    position: absolute;
+    transform: translateY(-50%);
+}
+
+a {
+    text-decoration: none;
+}
+
+.terrorist {
+    position: absolute;
+    transform: translateY(-50%);
+}
+
+table,tr,th,td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+@media screen and (min-width:320px) and (max-width:768px) {           /* Mobile */
+
+    body {
+        font-size: 1rem;
+    }
+
+    .detectImg {
+        width: 85%;
+        height: 40%;
+        padding:2%;
+        left: 50%;
+        top:4%;
+        transform: translateX(-50%);
+    }
+
+    .terrorist {
+        bottom: 4.5%;
+        padding: 2%;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 45%;
+        width: 90%;
+    }
+
+    td ,ol {
+        padding-top:3%;
+        padding-bottom: 3%;
+        padding-left: 5%;
+        width:50%;
+    }
+
+    th {
+        font-size: 1.3rem;
+        padding: 4%;
+    }
+
+}
+
+@media screen and (min-width:769px) {                                  /* Desktop */ 
+
+        .detectImg {
+            width: 48%;
+            height: 80%;
+            padding: 1%;
+            top: 50%;
+            left: 3%;
+        }
+
+        body {
+            font-size: 1.5rem;
+        }
+
+        .terrorist {
+            width: 40%;
+            right: 3%;
+            top: 50%;
+        }
+
+        table {
+            margin-left: 6.5%;
+        }
+
+        th {
+            font-size: 2rem;
+            width: 50%;
+            padding: 3%;
+        }
+        
+        td {
+            width: 50%;
+            padding-top: 3%;
+            padding-bottom: 3%;
+            padding-left: 5%;
+        }
+
+}

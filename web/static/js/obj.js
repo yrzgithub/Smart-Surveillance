@@ -1,0 +1,4 @@
+function setimage(element)
+{
+    
+}

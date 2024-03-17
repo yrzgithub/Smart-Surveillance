@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+
+        <meta charset="utf-8" name="viewport" content="width=device-width,initial-scale=1"/>
+        <title>Dark Hand</title>
+        <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkbJZ1GrmwzM_pPqlz5zJimqQzaNViEW3kpQ&usqp=CAU">
+        <link rel="stylesheet" href="{{url_for('static',filename = 'css/face.css')}}">
+        <script src="static/js/face.js"></script>
+
+    </head>
+
+    <body>
+
+        <img class="detectImg" id="detectImg" src="{{terrorist.getImg()}}">
+
+        <table class="terrorist">
+
+            <tr>
+                <th colspan="2">
+                    Terrorist
+                </th>
+            </tr>
+
+            <tr>
+                <td>
+                    Name
+                </td>
+
+                <td>
+                    {{terrorist.getName()}}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Age
+                </td>
+
+                <td>
+                    {{terrorist.getAge()}}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Country
+                </td>
+
+                <td>
+                    {{terrorist.getCountry()}}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Group
+                </td>
+
+                <td>
+                    {{terrorist.getGroup()}}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Religion
+                </td>
+
+                <td>
+                    {{terrorist.getReligion()}}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Position
+                </td>
+
+                <td>
+                    {{terrorist.getPosition()}}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Illness
+                </td>
+
+                <td>
+                    {{terrorist.getIllness()}}
+                </td>
+            </tr>
+
+        </table>
+        
+    </body>
+
+</html>
