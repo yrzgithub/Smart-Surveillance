@@ -6,3 +6,4 @@ test
 YOLO Military.v1i.yolov8
 data
 live
+web/__pycache__/classes.cpython-39.pyc
