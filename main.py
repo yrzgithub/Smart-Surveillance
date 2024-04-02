@@ -25,8 +25,13 @@ test = abspath("test\images")
 use_img = False
 use_yt = False
 stream = False
+<<<<<<< HEAD
 use_cloud = False
 use_video = True
+=======
+use_cloud = True
+use_video = False
+>>>>>>> fe017176548a0cc14ebf3dcc3a93afa643698b56
 
 known_face_names = ["Ram","Raj"]
 

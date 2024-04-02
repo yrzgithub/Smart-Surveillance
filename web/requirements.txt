@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+cmake
+>>>>>>> fe017176548a0cc14ebf3dcc3a93afa643698b56
 pyrebase4
 face_recognition
 cvlib

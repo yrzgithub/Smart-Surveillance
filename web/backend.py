@@ -34,7 +34,11 @@ dataPathObj = abspath("data\dataObj.pkl")
 pathFaces = abspath("data\\faces")
 
 
+<<<<<<< HEAD
 imgUrl = "https://firebasestorage.googleapis.com/v0/b/smart-surveillance-37cd5.appspot.com/o/image?alt=media&token=74ea648b-3d1c-4a3b-aeec-6ba192ae4e3c"
+=======
+imgUrl = "https://firebasestorage.googleapis.com/v0/b/smart-surveillance-37cd5.appspot.com/o/image.jpg?alt=media&token=74ea648b-3d1c-4a3b-aeec-6ba192ae4e3c"
+>>>>>>> fe017176548a0cc14ebf3dcc3a93afa643698b56
 prev = None
 
 
@@ -138,7 +142,11 @@ def getimage():
 
     for location in locations:
         a,b,c,d = location 
+<<<<<<< HEAD
         image = cv2.rectangle(image,(d,a),(b,c),(51,225,225),2)
+=======
+        image = cv2.rectangle(image,(d,a),(b,c),(51,225,225),1)
+>>>>>>> fe017176548a0cc14ebf3dcc3a93afa643698b56
     
     print("Detecting Objects...")
 
@@ -171,7 +179,11 @@ def getimage():
         (a,b,c,d) = location
         image = cv2.putText(image,detected_terrorist.getName(),(a+12,c+12),cv2.FONT_HERSHEY_PLAIN,1,(255,255,255),1,cv2.LINE_AA)
 
+<<<<<<< HEAD
     return dumps({"img":getEncodedImage(".jpeg",image),"faces":site["faces"],"objects":site["objects"]})
+=======
+    return dumps({"img":getEncodedImage(".png",image),"faces":site["faces"],"objects":site["objects"]})
+>>>>>>> fe017176548a0cc14ebf3dcc3a93afa643698b56
 
 
 @app.route("/weapon/<weapon>")
@@ -218,7 +230,11 @@ def uploadObj():
     tpe = args["type"].strip()
     power = args["power"].strip()
 
+<<<<<<< HEAD
     img = getEncodedImage(".jpeg",cv2.imdecode(np.frombuffer(image.read(),np.uint8),cv2.IMREAD_COLOR))
+=======
+    img = getEncodedImage(".png",cv2.imdecode(np.frombuffer(image.read(),np.uint8),cv2.IMREAD_COLOR))
+>>>>>>> fe017176548a0cc14ebf3dcc3a93afa643698b56
 
     weapon = Weapon(name)
     weapon.setColor(color)
@@ -285,7 +301,11 @@ def uploadFace():
     group = args["group"]
     residence = args["residence"]
 
+<<<<<<< HEAD
     encoded = getEncodedImage(".jpeg",image)
+=======
+    encoded = getEncodedImage(".png",image)
+>>>>>>> fe017176548a0cc14ebf3dcc3a93afa643698b56
 
     terrorist = Terrorist(name)
     terrorist.setAge(age)
