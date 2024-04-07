@@ -138,7 +138,7 @@ def getimage():
 
     for location in locations:
         a,b,c,d = location 
-        image = cv2.rectangle(image,(d,a),(b,c),(51,225,225),1)
+        image = cv2.rectangle(image,(d,a),(b,c),(51,225,225),2)
     
     print("Detecting Objects...")
 
@@ -147,8 +147,8 @@ def getimage():
 
     for index,box in enumerate(bboxs):
         a,b,c,d = box
-        image = cv2.rectangle(image,(a,b),(c,d),(51,225,225),1)
-        image = cv2.putText(image,labels[index],(c-50,d+30),fontScale=2,fontFace=cv2.FONT_HERSHEY_PLAIN,color=(0,0,225),thickness=1,lineType=cv2.LINE_AA)
+        image = cv2.rectangle(image,(a,b),(c,d),(51,225,225),2)
+        image = cv2.putText(image,labels[index],(c-50,d+30),fontScale=3,fontFace=cv2.FONT_HERSHEY_PLAIN,color=(0,0,225),thickness=2,lineType=cv2.LINE_AA)
     
     site["objects"] = labels
     site["faces"] = []
@@ -169,9 +169,9 @@ def getimage():
         detected_terrorist = data[name]
         site["faces"].append(detected_terrorist.getName())
         (a,b,c,d) = location
-        image = cv2.putText(image,detected_terrorist.getName(),(a+12,c+12),cv2.FONT_HERSHEY_PLAIN,1,(255,255,255),1,cv2.LINE_AA)
+        image = cv2.putText(image,detected_terrorist.getName(),(a+12,c+12),cv2.FONT_HERSHEY_PLAIN,3,(255,255,255),2,cv2.LINE_AA)
 
-    return dumps({"img":getEncodedImage(".png",image),"faces":site["faces"],"objects":site["objects"]})
+    return dumps({"img":getEncodedImage(".jpg",image),"faces":site["faces"],"objects":site["objects"]})
 
 
 @app.route("/weapon/<weapon>")
@@ -218,7 +218,7 @@ def uploadObj():
     tpe = args["type"].strip()
     power = args["power"].strip()
 
-    img = getEncodedImage(".png",cv2.imdecode(np.frombuffer(image.read(),np.uint8),cv2.IMREAD_COLOR))
+    img = getEncodedImage(".jpg",cv2.imdecode(np.frombuffer(image.read(),np.uint8),cv2.IMREAD_COLOR))
 
     weapon = Weapon(name)
     weapon.setColor(color)
@@ -273,7 +273,7 @@ def uploadFace():
         image = cv2.rectangle(image,(d,a),(b,c),(51,255,255),2)
     
     if len_face_encodings > 1:
-        return dumps({"error":"More than one face found.","img":getEncodedImage(".png",image)})
+        return dumps({"error":"More than one face found.","img":getEncodedImage(".jpg",image)})
 
     args = request.form
 
@@ -285,7 +285,7 @@ def uploadFace():
     group = args["group"]
     residence = args["residence"]
 
-    encoded = getEncodedImage(".png",image)
+    encoded = getEncodedImage(".jpg",image)
 
     terrorist = Terrorist(name)
     terrorist.setAge(age)
@@ -306,7 +306,7 @@ def uploadFace():
         file.close()
     
     print("Writing Image...")
-    cv2.imwrite(f"data\\faces\\{terrorist.id}.png",image)
+    cv2.imwrite(f"data\\faces\\{terrorist.id}.jpg",image)
 
     return dumps({"msg":"Image Uploaded","img":encoded})
 

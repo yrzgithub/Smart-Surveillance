@@ -39,7 +39,7 @@ for file in files:
 
     with open(path,"rb") as file:
         print("Uploading ",path)
-        storage.child("image").put(file,token=idToken,content_type="image\jpg")
+        storage.child("image.jpg").put(file,token=idToken,content_type="image\jpg")
         print("uploaded...")
         file.close()
 
