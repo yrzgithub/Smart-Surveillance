@@ -65,6 +65,7 @@ if isfile(dataPathObj):
 
 
 known_face_encodings = [terrorist.getFaceEncodings() for name,terrorist in data.items()]
+print("Known faces : ",len(known_face_encodings))
 
 
 
@@ -148,14 +149,14 @@ def getimage():
     for index,box in enumerate(bboxs):
         a,b,c,d = box
         image = cv2.rectangle(image,(a,b),(c,d),(51,225,225),2)
-        image = cv2.putText(image,labels[index],(c-50,d+30),fontScale=3,fontFace=cv2.FONT_HERSHEY_PLAIN,color=(0,0,225),thickness=2,lineType=cv2.LINE_AA)
+        image = cv2.putText(image,labels[index],(c-50,d+110),fontScale=3,fontFace=cv2.FONT_HERSHEY_PLAIN,color=(0,0,225),thickness=2,lineType=cv2.LINE_AA)
     
     site["objects"] = labels
     site["faces"] = []
 
     print("Recognizing...")
 
-    for encodings in fencodings:
+    for loc,encodings in enumerate(fencodings):
         if len(known_face_encodings)==0:
             break
         faceList = list(face_distance(known_face_encodings,encodings))
@@ -164,12 +165,14 @@ def getimage():
         if minumum >= 0.6:
             break 
         index = faceList.index(minumum)
-        location = locations[index]
+        print("Location Index : ",index)
+
+        location = locations[loc]
         name = [name for name,terrorist in data.items()][index]
         detected_terrorist = data[name]
         site["faces"].append(detected_terrorist.getName())
         (a,b,c,d) = location
-        image = cv2.putText(image,detected_terrorist.getName(),(a+12,c+12),cv2.FONT_HERSHEY_PLAIN,3,(255,255,255),2,cv2.LINE_AA)
+        image = cv2.putText(image,detected_terrorist.getName(),(c-50,d+110),cv2.FONT_HERSHEY_PLAIN,3,(255,255,255),2,cv2.LINE_AA)
 
     return dumps({"img":getEncodedImage(".jpg",image),"faces":site["faces"],"objects":site["objects"]})
 
@@ -300,6 +303,8 @@ def uploadFace():
 
     data[name] = terrorist
     known_face_encodings.append(face_encoding[0])
+
+    print("Known Face Encodings : ",len(known_face_encodings))
 
     with open(dataPathFace,"wb") as file:
         pickle.dump(data,file)
